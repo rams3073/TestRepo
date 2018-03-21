@@ -9,6 +9,7 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+        
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
@@ -20,7 +21,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run UnitTest
-          command: ./gradlew testDemoDebugUnitTest
+        #  command: ./gradlew testDemoDebugUnitTest
       - run:
           name: Setup emulator
           command: sdkmanager "system-images;android-16;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-16;default;armeabi-v7a"
